@@ -211,7 +211,7 @@ paths:
       responses:
         '200': 
           description: User account transaction details updated successfully
-          scherma:
+          schema:
             $ref: '#/definitions/UserTransactionDetails'
         '400':
           description: Bad Request
