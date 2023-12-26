@@ -147,7 +147,7 @@ paths:
           description: Internal Server Error
 
   # USER ACCOUNT TRANSACTIONS ----------------------------------------------------------------------
-  /user/accounts/accountID/transactions:
+  /user/accounts/{accountID}/transactions:
     get: 
       security:
         - Bearer: []
@@ -160,6 +160,11 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+        - in: path
+          name: accountID
+          type: string
+          required: true
+          description: Unique identifier of the user account
       produces:
         - application/json
       responses:
@@ -173,7 +178,7 @@ paths:
           description: Internal Server Error
   
   # USER ACCOUNT TRANSACTION && TRANSACTION DETAILS ----------------------------------------------------------------------
-  /user/accounts/accountID/transactions/transactionID:
+  /user/accounts/{accountID}/transactions/{transactionID}:
     put:
       security:
         -Bearer: []
@@ -186,6 +191,15 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+        - in: path
+          name: accountID
+          type: string
+          required: true
+          description: Unique identifier of the user account
+        - in: path
+          name: transactionID
+          type: string
+          description: Unique identifier of the user transaction
         - in: body
           name: body
           description: Updating transaction details
@@ -198,7 +212,7 @@ paths:
         '200': 
           description: User account transaction details updated successfully
           scherma:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/UserTransactionDetails'
         '400':
           description: Bad Request
         '500':
@@ -299,17 +313,16 @@ definitions:
           $ref: '#/definitions/UserTransaction'
 
   UserAccounts:
-    type: object
-    properties:
-      type:
-        type: string
-        description: user type of account
-      number:
-        type: string
-        description: user account number
-      amount:
-        $ref: '#/definitions/UserTransactions'
-        description: available balance of account
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          description: user type of account
+        number:
+          type: string
+          description: user account number
 
   UserTransactionDetails:
     type: object
