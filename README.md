@@ -2,7 +2,7 @@
 
 <div align='center'>
 
- <img src="/public/assets/ARGENT_BANK.png" alt="Argent bank Logo" />
+ <img src="./logo/ARGENT_BANK.png" alt="Argent bank Logo" />
 
 </div>
 <br><br>
